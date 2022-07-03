@@ -59,7 +59,7 @@ class WallServiceTest {
         assertEquals(serviceCheck0.id, serviceEnter0.posts[0].id)
 
         val serviceEnterId8 = serviceEnter0
-        serviceEnterId8.add(Post(2,
+        serviceEnterId8.add(Post(4,
             31,
             43,
             14,
@@ -84,7 +84,7 @@ class WallServiceTest {
             Post.Donut(true, 102, placeHolder = "Some Second String", true, Post.Donut.EditMode.all),
             70))
 
-        assertEquals(2, serviceEnterId8.posts[1].id)
+        assertEquals(2, serviceEnterId8.posts[4].id)
     }
 
     @Test
