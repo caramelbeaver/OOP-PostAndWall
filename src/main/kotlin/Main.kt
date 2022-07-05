@@ -15,7 +15,11 @@ fun main() {     // функция main - только для ручного т�
         Post.Reposts(47, true),
         Post.Views(2),
         Post.PostType.post,
+        Post.PostSource(Post.PostSource.Type.vk,null,null," https://vk.com/"),
+        Post.Geo("","",Post.Geo.Place(1,"",253511, 101537, 1647797883,"", 5, 1647797883, 2, 159, 25,"")),
         25,
+        copyHistory = (arrayOf(Post.Reposts(49, false), Post.Reposts(50, true))),
+        //copyHistory = null,
         canPin = true,
         canDelete = false,
         canEdit = false,
@@ -42,7 +46,10 @@ fun main() {     // функция main - только для ручного т�
         Post.Reposts(47, false),
         Post.Views(15),
         Post.PostType.suggest,
+        Post.PostSource(Post.PostSource.Type.rss,null,null," https://vk.com/"),
+        Post.Geo("","",Post.Geo.Place(2,"", 253511, 101580, 1647797905,"", 5, 1647797905, 1, 183, 29,"")),
         47,
+        copyHistory = (arrayOf(Post.Reposts(49, false), Post.Reposts(51, false))),
         canPin = false,
         canDelete = false,
         canEdit = true,
@@ -69,7 +76,11 @@ fun main() {     // функция main - только для ручного т�
         reposts = Post.Reposts(48, false),
         views = Post.Views(10),
         postType = Post.PostType.reply,
+        postSource = Post.PostSource(Post.PostSource.Type.rss,null,null," https://vk.com/"),
+        //geo = Post.Geo("","",Post.Geo.Place(2,"", 253511, 101580, 1647797905,"", 5, 1647797905, 1, 183, 29,"")),
+        geo = Post.Geo("MyTypePlace","N:253511, W:101580",null),
         signerId = 61,
+        copyHistory = (arrayOf(Post.Reposts(49, false), Post.Reposts(51, false))),
         canPin = false,
         canDelete = false,
         canEdit = true,
@@ -79,6 +90,7 @@ fun main() {     // функция main - только для ручного т�
         donut = Post.Donut(false, 118, "Some Updated String", true, Post.Donut.EditMode.duration),
         postponedId = 38
     )
+
     val temp1 = WallService()
     println(temp1.add(original))
     val temp2 = temp1

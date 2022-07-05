@@ -14,7 +14,12 @@ data class Post(
     var reposts: Reposts,
     var views: Views,
     var postType: PostType,
+
+    var postSource: PostSource?,
+    var geo: Geo?,
     var signerId: Int,
+    var copyHistory: Array<Reposts>?,
+
     var canPin: Boolean = false,
     var canDelete: Boolean = false,
     var canEdit: Boolean = false,
@@ -53,6 +58,36 @@ data class Post(
     data class Views(
         val count: Int
     )
+    data class PostSource(
+        val type: Type?,
+        val platform: String?,
+        val data: String?,
+        val url: String
+    ) {
+        enum class Type {
+            vk, widget, api, rss, sms
+        }
+    }
+    data class Geo(
+        val type: String,
+        val coordinates: String,
+        val place: Place?
+    ) {
+        data class Place(
+            val id: Int,
+            val title: String,
+            val latitude: Int,
+            val longitude: Int,
+            val created: Int,
+            val icon: String,
+            val checkins: Int,
+            val updated: Int,
+            val type: Int,
+            val country: Int,
+            val city: Int,
+            val address: String
+        )
+    }
     data class Donut(
         val isDonut: Boolean = false,
         val paidDuration: Int,
