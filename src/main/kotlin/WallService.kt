@@ -32,6 +32,7 @@ class WallService {
                 posts[index].views = postIn.views
                 posts[index].postType = postIn.postType
                 posts[index].postSource = postIn.postSource
+                posts[index].attachments = postIn.attachments
                 posts[index].geo = postIn.geo
                 posts[index].signerId = postIn.signerId
                 posts[index].copyHistory = postIn.copyHistory
