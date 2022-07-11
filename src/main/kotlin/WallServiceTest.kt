@@ -3,6 +3,94 @@ import org.junit.Assert.*
 
 class WallServiceTest {
 
+    @Test(expected = WallService.PostNotFoundException::class)
+    fun shouldThrow() {
+        val service = WallService()
+
+        service.add(Post(0,
+            25,
+            59,
+            12,
+            1647797692,
+            "New Netology Post",
+            37,
+            84,
+            true,
+            Post.Comments(2, true, 4, canClose = false, canOpen = false),
+            Post.Copyright(83, "https://--", "Some Name", "Some Type"),
+            Post.Likes(95, userLikes = false, canLike = true, canPublish = false),
+            Post.Reposts(47, true),
+            Post.Views(2),
+            Post.PostType.Post,
+            Post.PostSource(Post.PostSource.Type.Vk,"",""," https://vk.com/"),
+            attachments = arrayOf(
+                Post.Attachment.Photo.FhotoAttachment(Post.Attachment.Photo(Post.Attachment.Type.Photo, 1, 4, 18, 4, "MyTripToSouth"),"My New Photo Attached File"),
+                Post.Attachment.Video.VideoAttachment(Post.Attachment.Video(Post.Attachment.Type.Video, 2, 25, 12, "My walk", 128),"My New Video Attached File"),
+                Post.Attachment.Audio.AudioAttachment(Post.Attachment.Audio(Post.Attachment.Type.Audio, 3, 17, 3, 309, "Florida", 2), "My New Audio Attached File"),
+                Post.Attachment.Document.DocumentAttachment(Post.Attachment.Document(Post.Attachment.Type.Document, 8, 402, 15, ".doc", 153),"My New Document Attached File"),
+                Post.Attachment.Contact.ContactAttachment(Post.Attachment.Contact(Post.Attachment.Type.Contact, 11, 42, 10, "+7-918-356-37-82"), "My New Contact Attached File")
+            ),
+            Post.Geo("","",Post.Geo.Place(1,"",253511,101537,1647797883,"",5,1647797883,2,159,25,"")),
+            25,
+            copyHistory = (arrayOf(Post.Reposts(49, false), Post.Reposts(50, true))),
+            //copyHistory = null,
+            canPin = true,
+            canDelete = false,
+            canEdit = false,
+            isPinned = true,
+            markedAsAds = false,
+            isFavorite = false,
+            Post.Donut(false, 102, placeHolder = "Some String", false, Post.Donut.EditMode.all),
+            42))
+
+        val commentBelongToPost = Comment(21,5,15,"New Comment For PostId = 1",4,"photo",15,"GUID NUMBER")
+        service.createComment(commentBelongToPost)
+    }
+
+    @Test
+    fun shouldNotThrow() {
+        val service = WallService()
+
+        service.add(Post(0,
+            25,
+            59,
+            12,
+            1647797692,
+            "New Netology Post",
+            37,
+            84,
+            true,
+            Post.Comments(2, true, 4, canClose = false, canOpen = false),
+            Post.Copyright(83, "https://--", "Some Name", "Some Type"),
+            Post.Likes(95, userLikes = false, canLike = true, canPublish = false),
+            Post.Reposts(47, true),
+            Post.Views(2),
+            Post.PostType.Post,
+            Post.PostSource(Post.PostSource.Type.Vk,"",""," https://vk.com/"),
+            attachments = arrayOf(
+                Post.Attachment.Photo.FhotoAttachment(Post.Attachment.Photo(Post.Attachment.Type.Photo, 1, 4, 18, 4, "MyTripToSouth"),"My New Photo Attached File"),
+                Post.Attachment.Video.VideoAttachment(Post.Attachment.Video(Post.Attachment.Type.Video, 2, 25, 12, "My walk", 128),"My New Video Attached File"),
+                Post.Attachment.Audio.AudioAttachment(Post.Attachment.Audio(Post.Attachment.Type.Audio, 3, 17, 3, 309, "Florida", 2), "My New Audio Attached File"),
+                Post.Attachment.Document.DocumentAttachment(Post.Attachment.Document(Post.Attachment.Type.Document, 8, 402, 15, ".doc", 153),"My New Document Attached File"),
+                Post.Attachment.Contact.ContactAttachment(Post.Attachment.Contact(Post.Attachment.Type.Contact, 11, 42, 10, "+7-918-356-37-82"), "My New Contact Attached File")
+            ),
+            Post.Geo("","",Post.Geo.Place(1,"",253511,101537,1647797883,"",5,1647797883,2,159,25,"")),
+            25,
+            copyHistory = (arrayOf(Post.Reposts(49, false), Post.Reposts(50, true))),
+            //copyHistory = null,
+            canPin = true,
+            canDelete = false,
+            canEdit = false,
+            isPinned = true,
+            markedAsAds = false,
+            isFavorite = false,
+            Post.Donut(false, 102, placeHolder = "Some String", false, Post.Donut.EditMode.all),
+            42))
+
+        val commentNotToOnePost = Comment(52,1,17,"New Comment For PostId = 2",4,"video",17,"GUID NUMBER")
+        service.createComment(commentNotToOnePost)
+    }
+
     @Test
     fun add() {
         val serviceEnter0 = WallService()
@@ -20,8 +108,19 @@ class WallServiceTest {
             Post.Likes(95, userLikes = false, canLike = true, canPublish = false),
             Post.Reposts(47, true),
             Post.Views(2),
-            Post.PostType.post,
+            Post.PostType.Post,
+            Post.PostSource(Post.PostSource.Type.Vk,"",""," https://vk.com/"),
+            attachments = arrayOf(
+                Post.Attachment.Photo.FhotoAttachment(Post.Attachment.Photo(Post.Attachment.Type.Photo, 1, 4, 18, 4, "MyTripToSouth"),"My New Photo Attached File"),
+                Post.Attachment.Video.VideoAttachment(Post.Attachment.Video(Post.Attachment.Type.Video, 2, 25, 12, "My walk", 128),"My New Video Attached File"),
+                Post.Attachment.Audio.AudioAttachment(Post.Attachment.Audio(Post.Attachment.Type.Audio, 3, 17, 3, 309, "Florida", 2), "My New Audio Attached File"),
+                Post.Attachment.Document.DocumentAttachment(Post.Attachment.Document(Post.Attachment.Type.Document, 8, 402, 15, ".doc", 153),"My New Document Attached File"),
+                Post.Attachment.Contact.ContactAttachment(Post.Attachment.Contact(Post.Attachment.Type.Contact, 11, 42, 10, "+7-918-356-37-82"), "My New Contact Attached File")
+            ),
+            Post.Geo("","",Post.Geo.Place(1,"",253511,101537,1647797883,"",5,1647797883,2,159,25,"")),
             25,
+            copyHistory = (arrayOf(Post.Reposts(49, false), Post.Reposts(50, true))),
+            //copyHistory = null,
             canPin = true,
             canDelete = false,
             canEdit = false,
@@ -45,8 +144,19 @@ class WallServiceTest {
             Post.Likes(95, userLikes = false, canLike = true, canPublish = false),
             Post.Reposts(47, true),
             Post.Views(2),
-            Post.PostType.post,
+            Post.PostType.Post,
+            Post.PostSource(Post.PostSource.Type.Vk,"",""," https://vk.com/"),
+            attachments = arrayOf(
+                Post.Attachment.Photo.FhotoAttachment(Post.Attachment.Photo(Post.Attachment.Type.Photo, 1, 4, 18, 4, "MyTripToSouth"),"My New Photo Attached File"),
+                Post.Attachment.Video.VideoAttachment(Post.Attachment.Video(Post.Attachment.Type.Video, 2, 25, 12, "My walk", 128),"My New Video Attached File"),
+                Post.Attachment.Audio.AudioAttachment(Post.Attachment.Audio(Post.Attachment.Type.Audio, 3, 17, 3, 309, "Florida", 2), "My New Audio Attached File"),
+                Post.Attachment.Document.DocumentAttachment(Post.Attachment.Document(Post.Attachment.Type.Document, 8, 402, 15, ".doc", 153),"My New Document Attached File"),
+                Post.Attachment.Contact.ContactAttachment(Post.Attachment.Contact(Post.Attachment.Type.Contact, 11, 42, 10, "+7-918-356-37-82"), "My New Contact Attached File")
+            ),
+            Post.Geo("","",Post.Geo.Place(1,"",253511,101537,1647797883,"",5,1647797883,2,159,25,"")),
             25,
+            //copyHistory = (arrayOf(Post.Reposts(49, false), Post.Reposts(50, true))),
+            copyHistory = null,
             canPin = true,
             canDelete = false,
             canEdit = false,
@@ -73,8 +183,19 @@ class WallServiceTest {
             Post.Likes(95, userLikes = false, canLike = true, canPublish = true),
             Post.Reposts(47, false),
             Post.Views(15),
-            Post.PostType.suggest,
+            Post.PostType.Suggest,
+            Post.PostSource(Post.PostSource.Type.Rss,null,null," https://vk.com/"),
+            attachments = arrayOf(
+                Post.Attachment.Photo.FhotoAttachment(Post.Attachment.Photo(Post.Attachment.Type.Photo, 1, 4, 18, 4, "MyTripToSouth"),"My New Photo Attached File"),
+                Post.Attachment.Video.VideoAttachment(Post.Attachment.Video(Post.Attachment.Type.Video, 2, 25, 12, "My walk", 128),"My New Video Attached File"),
+                Post.Attachment.Audio.AudioAttachment(Post.Attachment.Audio(Post.Attachment.Type.Audio, 3, 17, 3, 309, "Florida", 2), "My New Audio Attached File"),
+                Post.Attachment.Document.DocumentAttachment(Post.Attachment.Document(Post.Attachment.Type.Document, 8, 402, 15, ".doc", 153),"My New Document Attached File"),
+                Post.Attachment.Contact.ContactAttachment(Post.Attachment.Contact(Post.Attachment.Type.Contact, 11, 42, 10, "+7-918-356-37-82"), "My New Contact Attached File")
+            ),
+            Post.Geo("","",Post.Geo.Place(2,"",253511,101580,1647797905,"",5,1647797905,1,183,29,"")),
             47,
+            //copyHistory = (arrayOf(Post.Reposts(49, false), Post.Reposts(51, false))),
+            copyHistory = null,
             canPin = false,
             canDelete = false,
             canEdit = true,
@@ -107,8 +228,19 @@ class WallServiceTest {
             Post.Likes(95, userLikes = false, canLike = true, canPublish = false),
             Post.Reposts(47, true),
             Post.Views(2),
-            Post.PostType.post,
+            Post.PostType.Post,
+            Post.PostSource(null,null,null," https://vk.com/"),
+            attachments = arrayOf(
+                Post.Attachment.Photo.FhotoAttachment(Post.Attachment.Photo(Post.Attachment.Type.Photo, 1, 4, 18, 4, "MyTripToSouth"),"My New Photo Attached File"),
+                Post.Attachment.Video.VideoAttachment(Post.Attachment.Video(Post.Attachment.Type.Video, 2, 25, 12, "My walk", 128),"My New Video Attached File"),
+                Post.Attachment.Audio.AudioAttachment(Post.Attachment.Audio(Post.Attachment.Type.Audio, 3, 17, 3, 309, "Florida", 2), "My New Audio Attached File"),
+                Post.Attachment.Document.DocumentAttachment(Post.Attachment.Document(Post.Attachment.Type.Document, 8, 402, 15, ".doc", 153),"My New Document Attached File"),
+                Post.Attachment.Contact.ContactAttachment(Post.Attachment.Contact(Post.Attachment.Type.Contact, 11, 42, 10, "+7-918-356-37-82"), "My New Contact Attached File")
+            ),
+            Post.Geo("MyTypePlace","N:253511,W:101537",null),
             25,
+            //copyHistory = (arrayOf(Post.Reposts(49, false), Post.Reposts(50, true))),
+            copyHistory = null,
             canPin = true,
             canDelete = false,
             canEdit = false,
@@ -132,8 +264,19 @@ class WallServiceTest {
             Post.Likes(95, userLikes = false, canLike = true, canPublish = true),
             Post.Reposts(47, false),
             Post.Views(15),
-            Post.PostType.suggest,
+            Post.PostType.Suggest,
+            Post.PostSource(Post.PostSource.Type.Api,"",""," https://vk.com/"),
+            attachments = arrayOf(
+                Post.Attachment.Photo.FhotoAttachment(Post.Attachment.Photo(Post.Attachment.Type.Photo, 1, 4, 18, 4, "MyTripToSouth"),"My New Photo Attached File"),
+                Post.Attachment.Video.VideoAttachment(Post.Attachment.Video(Post.Attachment.Type.Video, 2, 25, 12, "My walk", 128),"My New Video Attached File"),
+                Post.Attachment.Audio.AudioAttachment(Post.Attachment.Audio(Post.Attachment.Type.Audio, 3, 17, 3, 309, "Florida", 2), "My New Audio Attached File"),
+                Post.Attachment.Document.DocumentAttachment(Post.Attachment.Document(Post.Attachment.Type.Document, 8, 402, 15, ".doc", 153),"My New Document Attached File"),
+                Post.Attachment.Contact.ContactAttachment(Post.Attachment.Contact(Post.Attachment.Type.Contact, 11, 42, 10, "+7-918-356-37-82"), "My New Contact Attached File")
+            ),
+            Post.Geo("","",Post.Geo.Place(2,"",253511,101580,1647797905,"",5,1647797905,1,183,29,"")),
             47,
+            copyHistory = (arrayOf(Post.Reposts(49, false), Post.Reposts(51, false))),
+            //copyHistory = null,
             canPin = false,
             canDelete = false,
             canEdit = true,
@@ -157,8 +300,19 @@ class WallServiceTest {
             likes = Post.Likes(96, userLikes = false, canLike = true, canPublish = false),
             reposts = Post.Reposts(8, false),
             views = Post.Views(7),
-            postType = Post.PostType.postpone,
+            postType = Post.PostType.Postpone,
+            postSource = Post.PostSource(Post.PostSource.Type.Rss,"",""," https://vk.com/"),
+            attachments = arrayOf(
+                Post.Attachment.Photo.FhotoAttachment(Post.Attachment.Photo(Post.Attachment.Type.Photo, 1, 4, 18, 4, "MyTripToSouth"),"My New Photo Attached File"),
+                Post.Attachment.Video.VideoAttachment(Post.Attachment.Video(Post.Attachment.Type.Video, 2, 25, 12, "My walk", 128),"My New Video Attached File"),
+                Post.Attachment.Audio.AudioAttachment(Post.Attachment.Audio(Post.Attachment.Type.Audio, 3, 17, 3, 309, "Florida", 2), "My New Audio Attached File"),
+                Post.Attachment.Document.DocumentAttachment(Post.Attachment.Document(Post.Attachment.Type.Document, 8, 402, 15, ".doc", 153),"My New Document Attached File"),
+                Post.Attachment.Contact.ContactAttachment(Post.Attachment.Contact(Post.Attachment.Type.Contact, 11, 42, 10, "+7-918-356-37-82"), "My New Contact Attached File")
+            ),
+            geo = Post.Geo("","",Post.Geo.Place(2,"",253511,101580,1647797905,"",5,1647797905,1,183,29,"")),
             signerId = 61,
+            copyHistory = (arrayOf(Post.Reposts(49, false), Post.Reposts(51, false))),
+            //copyHistory = null,
             canPin = true,
             canDelete = false,
             canEdit = true,
@@ -183,8 +337,19 @@ class WallServiceTest {
             likes = Post.Likes(96, userLikes = true, canLike = true, canPublish = true),
             reposts = Post.Reposts(48, false),
             views = Post.Views(10),
-            postType = Post.PostType.reply,
+            postType = Post.PostType.Reply,
+            postSource = Post.PostSource(Post.PostSource.Type.Sms,"",""," https://vk.com/"),
+            attachments = arrayOf(
+                Post.Attachment.Photo.FhotoAttachment(Post.Attachment.Photo(Post.Attachment.Type.Photo, 1, 4, 18, 4, "MyTripToSouth"),"My New Updated Photo Attached File"),
+                Post.Attachment.Video.VideoAttachment(Post.Attachment.Video(Post.Attachment.Type.Video, 2, 25, 12, "My walk", 128),"My New Updated Video Attached File"),
+                Post.Attachment.Audio.AudioAttachment(Post.Attachment.Audio(Post.Attachment.Type.Audio, 3, 17, 3, 309, "Florida", 2), "My New Updated Audio Attached File"),
+                Post.Attachment.Document.DocumentAttachment(Post.Attachment.Document(Post.Attachment.Type.Document, 8, 402, 15, ".doc", 153),"My New Updated Document Attached File"),
+                Post.Attachment.Contact.ContactAttachment(Post.Attachment.Contact(Post.Attachment.Type.Contact, 11, 42, 10, "+7-918-356-37-82"), "My New Updated Contact Attached File")
+            ),
+            geo = Post.Geo("","",Post.Geo.Place(2,"",253511,101580,1647797905,"",5,1647797905,1,183,29,"")),
             signerId = 61,
+            //copyHistory = (arrayOf(Post.Reposts(49, false), Post.Reposts(51, false))),
+            copyHistory = null,
             canPin = false,
             canDelete = false,
             canEdit = true,
@@ -211,8 +376,19 @@ class WallServiceTest {
             likes = Post.Likes(96, userLikes = true, canLike = true, canPublish = true),
             reposts = Post.Reposts(48, false),
             views = Post.Views(10),
-            postType = Post.PostType.reply,
+            postType = Post.PostType.Reply,
+            postSource = Post.PostSource(Post.PostSource.Type.Widget,"",""," https://vk.com/"),
+            attachments = arrayOf(
+                Post.Attachment.Photo.FhotoAttachment(Post.Attachment.Photo(Post.Attachment.Type.Photo, 1, 4, 18, 4, "MyTripToSouth"),"My New Updated Photo Attached File"),
+                Post.Attachment.Video.VideoAttachment(Post.Attachment.Video(Post.Attachment.Type.Video, 2, 25, 12, "My walk", 128),"My New Updated Video Attached File"),
+                Post.Attachment.Audio.AudioAttachment(Post.Attachment.Audio(Post.Attachment.Type.Audio, 3, 17, 3, 309, "Florida", 2), "My New Updated Audio Attached File"),
+                Post.Attachment.Document.DocumentAttachment(Post.Attachment.Document(Post.Attachment.Type.Document, 8, 402, 15, ".doc", 153),"My New Updated Document Attached File"),
+                Post.Attachment.Contact.ContactAttachment(Post.Attachment.Contact(Post.Attachment.Type.Contact, 11, 42, 10, "+7-918-356-37-82"), "My New Updated Contact Attached File")
+            ),
+            geo = Post.Geo("","",Post.Geo.Place(2,"",253511,101580,1647797905,"",5,1647797905,1,183,29,"")),
             signerId = 61,
+            //copyHistory = (arrayOf(Post.Reposts(49, false), Post.Reposts(51, false))),
+            copyHistory = null,
             canPin = false,
             canDelete = false,
             canEdit = true,
