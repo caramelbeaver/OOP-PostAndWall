@@ -1,5 +1,18 @@
 class WallService {
     var posts = emptyArray<Post>()
+    private var comments = emptyArray<Comment>()
+
+    class PostNotFoundException(message: String) : RuntimeException(message)
+
+    fun createComment(comment: Comment): Comment {
+        for (post in posts) {
+            if (post.id == comment.postId) {
+                comments += comment
+                return comment
+            }
+        }
+        return throw PostNotFoundException("no post with id ${comment.postId}")
+    }
 
     fun add(post: Post): Post {
         val postId = assignPostId()
